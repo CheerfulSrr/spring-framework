@@ -91,6 +91,8 @@ public class DefaultDocumentLoader implements DocumentLoader {
 		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setNamespaceAware(namespaceAware);
 
+		// XmlValidationModeDetector.VALIDATION_NONE 禁用验证
+		// validationMode 默认为3, 使用xsd进行验证
 		if (validationMode != XmlValidationModeDetector.VALIDATION_NONE) {
 			factory.setValidating(true);
 			if (validationMode == XmlValidationModeDetector.VALIDATION_XSD) {

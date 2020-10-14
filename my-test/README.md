@@ -19,3 +19,5 @@ compileKotlin.classpath += files(compileGroovy.destinationDir)
 3. 新建模块
    * 将新模块的`build.gradle`文件修改为`${module-name}.gradle`
    * 修改根目录下的`settings.gradle`, 在最后一行`include`后添加`include '${module-name}'`
+4. 单元测试
+   * 单元测试类必需以`"**/*Tests.class", "**/*Test.class"`的规则命名
