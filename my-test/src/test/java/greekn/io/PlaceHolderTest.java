@@ -24,7 +24,7 @@ public class PlaceHolderTest {
 		ApplicationContext context = new ClassPathXmlApplicationContext("beanFactoryTest.xml");
 		User bean = context.getBean(User.class);
 		Assert.assertEquals(bean.getName(), "aaa");
-		Assert.assertEquals(bean.getAddress(), "bbb");
+		Assert.assertEquals(bean.getAddress(), "test1");
 	}
 
 }
