@@ -1,4 +1,4 @@
-package greekn.io;
+package io.greekn;
 
 import org.junit.Test;
 import org.springframework.core.io.ClassPathResource;

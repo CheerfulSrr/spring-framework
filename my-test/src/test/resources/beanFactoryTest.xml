@@ -1,19 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:context="http://www.springframework.org/schema/context" xmlns:p="http://www.springframework.org/schema/p"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<context:component-scan base-package="greekn.io"/>
+	<context:component-scan base-package="io.greekn"/>
 
 	<bean id="placeholderConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
 		<property name="location" value="classpath:test.properties"/>
 	</bean>
 
-	<bean id="user" class="greekn.io.User">
+	<bean id="address" class="io.greekn.House" p:address="new_york"/>
+
+	<bean id="user" class="io.greekn.User">
 		<property name="id" value="1"/>
 		<property name="name" value="${${test2}}"/>
-		<property name="address" value="${test2}"/>
+		<property name="house" ref="address"/>
 	</bean>
+
+	<alias name="user" alias="user_alias"/>
 
 </beans>

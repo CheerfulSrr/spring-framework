@@ -1,4 +1,4 @@
-package greekn.io;
+package io.greekn;
 
 public class MyService {
 }

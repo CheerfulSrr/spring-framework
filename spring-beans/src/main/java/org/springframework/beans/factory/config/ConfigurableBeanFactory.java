@@ -89,6 +89,7 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
 	void setBeanClassLoader(@Nullable ClassLoader beanClassLoader);
 
 	/**
+	 * sun.misc.Launcher$AppClassLoader
 	 * Return this factory's class loader for loading bean classes
 	 * (only {@code null} if even the system ClassLoader isn't accessible).
 	 * @see org.springframework.util.ClassUtils#forName(String, ClassLoader)
@@ -346,6 +347,7 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
 	void setCurrentlyInCreation(String beanName, boolean inCreation);
 
 	/**
+	 * 返回给定bean的创建状态, 创建中时返回true
 	 * Determine whether the specified bean is currently in creation.
 	 * @param beanName the name of the bean
 	 * @return whether the bean is currently in creation
@@ -363,6 +365,7 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
 	void registerDependentBean(String beanName, String dependentBeanName);
 
 	/**
+	 * 返回依赖自己的bean的名称数组
 	 * Return the names of all beans which depend on the specified bean, if any.
 	 * @param beanName the name of the bean
 	 * @return the array of dependent bean names, or an empty array if none
@@ -371,6 +374,7 @@ public interface ConfigurableBeanFactory extends HierarchicalBeanFactory, Single
 	String[] getDependentBeans(String beanName);
 
 	/**
+	 * 返回自己依赖的bean的名称数组
 	 * Return the names of all beans that the specified bean depends on, if any.
 	 * @param beanName the name of the bean
 	 * @return the array of names of beans which the bean depends on,
