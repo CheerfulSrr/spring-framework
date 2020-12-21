@@ -20,4 +20,7 @@
 
 	<alias name="user" alias="user_alias"/>
 
+	<bean id="woman" class="io.greekn.Woman" p:age="200" p:name="woman1" p:man-ref="man"/>
+	<bean id="man" class="io.greekn.Man" p:age="20" p:name="man1" p:woman-ref="woman"/>
+
 </beans>
