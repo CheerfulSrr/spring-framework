@@ -31,6 +31,7 @@ public class SimpleAliasRegistryTests {
 		registry.registerAlias("test", "testAlias");
 		registry.registerAlias("testAlias", "testAlias2");
 		registry.registerAlias("testAlias2", "testAlias3");
+		registry.registerAlias("testAlias3", "test");
 
 		assertTrue(registry.hasAlias("test", "testAlias"));
 		assertTrue(registry.hasAlias("test", "testAlias2"));

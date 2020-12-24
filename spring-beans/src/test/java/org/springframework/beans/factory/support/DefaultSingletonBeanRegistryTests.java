@@ -36,7 +36,7 @@ public class DefaultSingletonBeanRegistryTests {
 	public void testSingletons() {
 		DefaultSingletonBeanRegistry beanRegistry = new DefaultSingletonBeanRegistry();
 
-		TestBean tb = new TestBean();
+		TestBean tb = new TestBean("testBean");
 		beanRegistry.registerSingleton("tb", tb);
 		assertSame(tb, beanRegistry.getSingleton("tb"));
 

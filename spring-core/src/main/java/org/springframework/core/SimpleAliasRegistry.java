@@ -46,7 +46,11 @@ public class SimpleAliasRegistry implements AliasRegistry {
 	/** Map from alias to canonical name */
 	private final Map<String, String> aliasMap = new ConcurrentHashMap<>(16);
 
-
+	/**
+	 * 注册时如果会造成循环依赖则抛出异常
+	 * @param name the canonical name
+	 * @param alias the alias to be registered
+	 */
 	@Override
 	public void registerAlias(String name, String alias) {
 		Assert.hasText(name, "'name' must not be empty");
