@@ -112,10 +112,18 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 	/** Map between containing bean names: bean name --> Set of bean names that the bean contains */
 	private final Map<String, Set<String>> containedBeanMap = new ConcurrentHashMap<>(16);
 
-	/** Map between dependent bean names: bean name --> Set of dependent bean names */
+	/**
+	 * String: beanName
+	 * Set<String>: beanName所有依赖的beanName
+	 * Map between dependent bean names: bean name --> Set of dependent bean names
+	 */
 	private final Map<String, Set<String>> dependentBeanMap = new ConcurrentHashMap<>(64);
 
-	/** Map between depending bean names: bean name --> Set of bean names for the bean's dependencies */
+	/**
+	 * String: 被依赖的beanName
+	 * Set<String>: 所有依赖beanName的beanName
+	 * Map between depending bean names: bean name --> Set of bean names for the bean's dependencies
+	 */
 	private final Map<String, Set<String>> dependenciesForBeanMap = new ConcurrentHashMap<>(64);
 
 
@@ -434,6 +442,19 @@ public class DefaultSingletonBeanRegistry extends SimpleAliasRegistry implements
 		}
 	}
 
+	/**
+	 * 1. 根据beanName在dependentBeanMap中获得依赖Set集合
+	 * 2. 判断dependentBeanName是否在Set集合中
+	 * 3. 如果不在集合中, 则遍历Set集合, 遍历时将当前元素放入alreadySeen中
+	 * 4. 递归调用isDependent(), 如果alreadySeen中已经有此beanName, 说明beanName存在循环依赖
+	 *   * c->b
+	 *   * b->c
+	 *
+	 * @param beanName 判断的bean
+	 * @param dependentBeanName 是否依赖的bean
+	 * @param alreadySeen 已经扫描过的bean
+	 * @return
+	 */
 	private boolean isDependent(String beanName, String dependentBeanName, @Nullable Set<String> alreadySeen) {
 		if (alreadySeen != null && alreadySeen.contains(beanName)) {
 			return false;

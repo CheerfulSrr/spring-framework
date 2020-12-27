@@ -347,6 +347,7 @@ public class PropertiesBeanDefinitionReader extends AbstractBeanDefinitionReader
 		if (prefix == null) {
 			prefix = "";
 		}
+		// 注册bean的数量
 		int beanCount = 0;
 
 		for (Object key : map.keySet()) {
@@ -411,11 +412,11 @@ public class PropertiesBeanDefinitionReader extends AbstractBeanDefinitionReader
 
 		ConstructorArgumentValues cas = new ConstructorArgumentValues();
 		MutablePropertyValues pvs = new MutablePropertyValues();
-
+		// 解析properties, 对bean进行赋值等操作
 		for (Map.Entry<?, ?> entry : map.entrySet()) {
 			String key = StringUtils.trimWhitespace((String) entry.getKey());
 			if (key.startsWith(prefix + SEPARATOR)) {
-				String property = key.substring(prefix.length() + SEPARATOR.length());
+				String property = key.substring(prefix.length() + SEPARATOR.length()); // 解析描述, (class) (abstract) ...
 				if (CLASS_KEY.equals(property)) {
 					className = StringUtils.trimWhitespace((String) entry.getValue());
 				}
@@ -478,8 +479,8 @@ public class PropertiesBeanDefinitionReader extends AbstractBeanDefinitionReader
 		if (parent == null && className == null && !beanName.equals(this.defaultParentBean)) {
 			parent = this.defaultParentBean;
 		}
-
 		try {
+			// 解析properties完毕, 创建新的BeanDefinition
 			AbstractBeanDefinition bd = BeanDefinitionReaderUtils.createBeanDefinition(
 					parent, className, getBeanClassLoader());
 			bd.setScope(scope);
@@ -487,6 +488,7 @@ public class PropertiesBeanDefinitionReader extends AbstractBeanDefinitionReader
 			bd.setLazyInit(lazyInit);
 			bd.setConstructorArgumentValues(cas);
 			bd.setPropertyValues(pvs);
+			// 使用DefaultListableBeanFactory注册BeanDefinition
 			getRegistry().registerBeanDefinition(beanName, bd);
 		}
 		catch (ClassNotFoundException ex) {
