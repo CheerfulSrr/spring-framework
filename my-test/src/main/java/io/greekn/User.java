@@ -1,5 +1,8 @@
 package io.greekn;
 
+import lombok.ToString;
+
+@ToString
 public class User {
 
 	private int id;

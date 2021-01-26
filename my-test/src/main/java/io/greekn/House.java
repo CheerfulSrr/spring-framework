@@ -1,5 +1,7 @@
 package io.greekn;
 
+import lombok.ToString;
+
 /**
  * <p>
  *
@@ -12,6 +14,7 @@ package io.greekn;
  * @modified Greekn
  * @description
  */
+@ToString
 public class House {
 	private String address;
 
